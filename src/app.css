@@ -152,7 +152,8 @@ body {
 
 .circle-cente,
 [transition-style='out:circle:center'] {
-	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-out-center both;
+	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-out-center
+		both;
 	animation-delay: var(--del, 0s);
 }
 
@@ -167,7 +168,8 @@ body {
 }
 
 [transition-style='in:circle:center'] {
-	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-in-center both;
+	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-in-center
+		both;
 	animation-delay: var(--del, 0.1s);
 }
 
@@ -186,7 +188,8 @@ body {
 }
 
 [transition-style='out:circle:hesitate'] {
-	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-out-hesitate both;
+	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-out-hesitate
+		both;
 	animation-delay: var(--del, 0.1s);
 }
 
@@ -206,7 +209,8 @@ body {
 
 .circle-hestitate,
 [transition-style='in:circle:hesitate'] {
-	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-in-hesitate both;
+	animation: var(--dur, 2.5s) cubic-bezier(0.25, 1, 0.3, 1) circle-in-hesitate
+		both;
 	animation-delay: var(--del, 0.1s);
 }
 
@@ -322,5 +326,3 @@ svg.nwp-icon {
 .page {
 	background-color: var(--color-base-100);
 }
-
-

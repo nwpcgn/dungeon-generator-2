@@ -21,9 +21,9 @@ export function generateDungeon(width = 40, height = 20): DungeonResult {
 		Array(width).fill(' ')
 	)
 
-	// Dungeon-Zellen setzen ('.' für Boden, '#' für Wand)
+	// Dungeon-Zellen setzen ('.' für Boden, 'x' für Wand)
 	digger.create((x, y, wall) => {
-		displayMap[y][x] = wall ? '#' : '.'
+		displayMap[y][x] = wall ? 'x' : '.'
 	})
 
 	// Räume extrahieren
@@ -80,7 +80,7 @@ export function renderDungeonToDOM(container: HTMLElement, map: string[][]) {
 			tile.style.height = '1rem'
 
 			const cell = map[y][x]
-			if (cell === '#') {
+			if (cell === 'x') {
 				tile.style.background = '#333' // Wand
 			} else if (cell === '.') {
 				tile.style.background = '#ccc' // Boden
@@ -107,7 +107,7 @@ export function renderDungeonToCanvas(
 	for (let y = 0; y < map.length; y++) {
 		for (let x = 0; x < map[0].length; x++) {
 			const cell = map[y][x]
-			if (cell === '#') {
+			if (cell === 'x') {
 				ctx.fillStyle = '#444' // Wand
 			} else if (cell === '.') {
 				ctx.fillStyle = '#eee' // Boden

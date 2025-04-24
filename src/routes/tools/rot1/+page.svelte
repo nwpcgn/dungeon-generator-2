@@ -1,7 +1,11 @@
 <script lang="ts">
-	import Rot1 from '$lib/rogue/Grid.svelte'
+	import Grid from '$lib/rogue/Rogue.svelte'
+	import Notifications from '$lib/toast/Notifications.svelte';
 </script>
 
 <section class="page nwp">
-	<Rot1></Rot1>
+	<Grid></Grid>
 </section>
+
+
+<Notifications></Notifications>

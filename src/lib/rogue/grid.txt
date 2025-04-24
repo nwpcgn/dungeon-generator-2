@@ -24,6 +24,7 @@
 
 	const drawDungeon = (width = 50, height = 30) => {
 		dungeon = generateDungeon(width, height)
+		// displayMap, rooms, corridors, doors, areals
 		tileMap = dungeon.displayMap
 		rooms = dungeon.rooms
 		doors = dungeon.doors
@@ -34,9 +35,36 @@
 			var y = parseInt(parts[1])
 			tileMap[y][x] = 'r'
 		}
+		// rooms.forEach(({ x1, y1, x2, y2 }, i) => {
+		// 	const ys = y1 - 1
+		// 	const xs = x1 - 1
+		// 	const ye = y2 + 1
+		// 	const xe = x2 + 1
+
+		// 	for (let y = ys; y <= ye; y++) {
+		// 		if (y == ys || y == ye) {
+		// 			for (let x = xs; x <= xe; x++) {
+		// 				tileMap[y][x] = '#'
+		// 			}
+		// 		} else {
+		// 			for (let x = xs; x <= xe; x++) {
+		// 				if (x == xs || x == xe) {
+		// 					tileMap[y][x] = '#'
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+
+		// 	tileMap[y1][x1] = 'o'
+		// 	tileMap[y1][x2] = 'o'
+		// 	tileMap[y2][x1] = 'o'
+		// 	tileMap[y2][x2] = 'o'
+		// })
+
 		doors.forEach(({ x, y }) => {
 			tileMap[y][x] = 'D'
 		})
+
 		const { centerX, centerY } = rooms[0]
 		player = { x: centerX, y: centerY }
 	}

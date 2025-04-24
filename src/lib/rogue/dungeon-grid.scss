@@ -1,27 +1,37 @@
 :root {
-	--gg-size: 600px;
+	--dungeon-50: #fcfcfc;
+	--dungeon-100: #f5f7f7;
+	--dungeon-200: #ebeef0;
+	--dungeon-300: #dfe3e6;
+	--dungeon-400: #c5ccd1;
+	--dungeon-500: #adb5bd;
+	--dungeon-600: #8e9cab;
+	--dungeon-700: #61748c;
+	--dungeon-800: #3e5270;
+	--dungeon-900: #233554;
+	--dungeon-950: #0e1b36;
+	--gg-size: 10px;
 	--gg-gap: 1px;
 	--gg-cols: 10;
 }
 
 .rogue-grid {
-	display: grid;
-	width: var(--gg-size);
-	grid-template-columns: repeat(var(--gg-cols), 1fr);
+	display: inline-grid;
+	grid-template-columns: repeat(var(--gg-cols), var(--gg-size));
 	gap: var(--gg-gap);
 	padding: var(--gg-gap);
 	position: relative;
-	background-color: var(--color-base-300);
+	background-color: var(--dungeon-50);
 
 	.tile {
-		--tile-color: var(--color-base-100);
+		--tile-color: var(--dungeon-200);
 		display: grid;
 		grid-template: 1 / 1;
 		aspect-ratio: 1 / 1;
 		position: relative;
 		overflow: hidden;
 		background-color: var(--tile-color);
-		transition: all 0.5s ease-in-out;
+
 
 		> * {
 			grid-row: 1;
@@ -33,15 +43,21 @@
 			width: 100%;
 		}
 
+		&.blank {
+			--tile-color: transparent;
+		}
+		&.floor {
+			--tile-color: var(--dungeon-400);
+		}
 		&.wall {
-			--tile-color: var(--color-base-200);
+			--tile-color: var(--dungeon-800);
 		}
 
-		&.floor {
-			--tile-color: var(--color-base-content);
-		}
 		&.door {
 			--tile-color: var(--color-error);
+		}
+		&.room {
+			--tile-color: var(--dungeon-500);
 		}
 		&.obs {
 			--tile-color: var(--color-warning);

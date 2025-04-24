@@ -1,23 +1,41 @@
 <script lang="ts">
+	import './dungeon-grid.scss'
 	import {
 		generateDungeon,
 		renderDungeonToDOM,
 		renderDungeonToCanvas
-	} from './dungeon-generator2'
+	} from './dungeon-generator'
 
 	let rows: number = $state(30)
 	let cols: number = $state(50)
 	let tileMap: string[][] = $state([])
+	let dungeon = $state([])
 	let rooms = $state([])
 	let doors = $state([])
+	let style = $derived(`--gg-size: 800px;	--gg-gap: 1px;	--gg-cols: ${cols};`)
+	let player = $state({ x: 0, y: 0 })
 	let gridContainer: HTMLDivElement
 	let miniCanvas: HTMLCanvasElement
 
 	const create = (width = 50, height = 30) => {
-		const dungeon = generateDungeon(width, height)
+		dungeon = generateDungeon(width, height)
 		tileMap = dungeon.displayMap
 		rooms = dungeon.rooms
 		doors = dungeon.doors
+
+		doors.forEach(({ x, y }) => {
+			tileMap[y][x] = 'D'
+		})
+
+		rooms.forEach(({ x1, y1, x2, y2 }) => {
+			tileMap[y1][x1] = 'o'
+			tileMap[y1][x2] = 'o'
+			tileMap[y2][x1] = 'o'
+			tileMap[y2][x2] = 'o'
+		})
+
+		const { centerX, centerY } = rooms[0]
+		player = { x: centerX, y: centerY }
 	}
 
 	const recreate = () => {
@@ -28,7 +46,7 @@
 
 	$effect(() => {
 		if (gridContainer && miniCanvas) {
-			renderDungeonToDOM(gridContainer, tileMap)
+			// renderDungeonToDOM(gridContainer, tileMap)
 			renderDungeonToCanvas(miniCanvas, tileMap)
 		}
 	})
@@ -36,8 +54,26 @@
 
 <article class="flex justify-center py-4">
 	<h1 class="text-4xl font-bold">Dungeon Generator 2</h1>
+	<p>Player {player.x} {player.y}</p>
 </article>
-
+<article class="flex justify-center py-4">
+	<div class="rogue-grid" {style}>
+		{#each tileMap as row, y}
+			{#each row as col, x}
+				<span
+					class="tile"
+					class:wall={col === '#'}
+					class:floor={col === '.'}
+					class:obs={col === 'o'}
+					class:door={col === 'D'}>
+					{#if player.x == x && player.y == y}
+						<span class="player"></span>
+					{/if}
+				</span>
+			{/each}
+		{/each}
+	</div>
+</article>
 <article class="mb-4 flex flex-col items-center gap-4 py-4">
 	<div class="join">
 		<label class="input join-item">
@@ -60,7 +96,7 @@
 			<div class="collapse-title font-semibold">Map JSON</div>
 			<div class="collapse-content text-sm">
 				<textarea class="textarea w-xl" rows="10"
-					>{JSON.stringify(tileMap)}</textarea>
+					>{JSON.stringify(dungeon)}</textarea>
 			</div>
 		</div>
 	</div>

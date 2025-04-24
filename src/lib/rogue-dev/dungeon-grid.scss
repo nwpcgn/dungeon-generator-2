@@ -1,0 +1,53 @@
+:root {
+	--gg-size: 600px;
+	--gg-gap: 1px;
+	--gg-cols: 10;
+}
+
+.rogue-grid {
+	display: grid;
+	width: var(--gg-size);
+	grid-template-columns: repeat(var(--gg-cols), 1fr);
+	gap: var(--gg-gap);
+	padding: var(--gg-gap);
+	position: relative;
+	background-color: var(--color-base-300);
+
+	.tile {
+		--tile-color: var(--color-base-100);
+		display: grid;
+		grid-template: 1 / 1;
+		aspect-ratio: 1 / 1;
+		position: relative;
+		overflow: hidden;
+		background-color: var(--tile-color);
+		transition: all 0.5s ease-in-out;
+
+		> * {
+			grid-row: 1;
+			grid-column: 1;
+			display: grid;
+			place-content: center;
+			overflow: hidden;
+			height: 100%;
+			width: 100%;
+		}
+
+		&.wall {
+			--tile-color: var(--color-base-200);
+		}
+
+		&.floor {
+			--tile-color: var(--color-base-content);
+		}
+		&.door {
+			--tile-color: var(--color-error);
+		}
+		&.obs {
+			--tile-color: var(--color-warning);
+		}
+		.player {
+			background-color: var(--color-info);
+		}
+	}
+}

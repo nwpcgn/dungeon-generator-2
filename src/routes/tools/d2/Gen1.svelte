@@ -64,7 +64,5 @@
 		wall: 3
 	})
 
-	console.log({mappedTiles});
+	console.log({ mappedTiles })
 </script>
-
-
